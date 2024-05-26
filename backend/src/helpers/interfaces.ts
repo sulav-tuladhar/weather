@@ -14,3 +14,8 @@ export interface WeatherData {
     wind_kph: string,
     humidity: number
 }
+
+export interface APIERROR {
+    message: string;
+    code: number
+}
