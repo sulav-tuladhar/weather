@@ -27,6 +27,8 @@ function HomePage() {
             setIsLoading(false);
         } catch (err: any) {
             setIsLoading(false);
+            if(err.response.status == 500)
+                setError("Something went wrong please try again in a few minutes")
             if (err.response.data)
                 setError(err.response.data.message)
         }
