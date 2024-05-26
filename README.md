@@ -1,4 +1,4 @@
--> Firstyl create .env file in the root folder of backend server and paste the same code as given below:-
+-> Firstyl create .env file in the root folder of backend server and paste the same code as given below :-
 BASE_URL = https://api.weatherapi.com/v1/current.json?key=81a01136b31c448e980153256242505&
 
 Installation
