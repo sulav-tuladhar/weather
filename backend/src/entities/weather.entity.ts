@@ -6,7 +6,7 @@ export class Weather {
     id!: number;
 
     @Column()
-    name!: string
+    location!: string
 
     @Column()
     local_time!: string
@@ -18,7 +18,7 @@ export class Weather {
     temp_f!: number
 
     @Column({ nullable: false })
-        is_day!: boolean
+    is_day!: boolean
     
     @Column({ nullable: true })
     condition!: string

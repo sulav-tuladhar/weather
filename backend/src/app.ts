@@ -5,6 +5,9 @@ const express = require('express')
 const app = express();
 const PORT = 9191;
 const cors = require('cors');
+const weatherRoute = require('./modules/weather/weather.router');
+
+require('dotenv').config();
 
 app.use(cors({
     credentials: true,
@@ -21,6 +24,8 @@ app.use(express.urlencoded({
     extended: true
 }))
 app.use(express.json())
+
+app.use('/', weatherRoute);
 
 // 404 error handler
 app.use(function(req: Request, res: Response, next: NextFunction){
