@@ -1,21 +1,10 @@
+import { Weather } from "../../utils/interfaces"
+
 function ContentComponent(
     { data, deg, kph, changeWindSpeed, changeTempUnit }
         :
         {
-            data:
-            {
-                condition: string,
-                condition_img: string,
-                humidity: number,
-                id: number,
-                is_day: number,
-                local_time: string,
-                location: string,
-                temp_c: number,
-                temp_f: number,
-                wind_kph: number,
-                wind_mph: number
-            },
+            data: Weather,
             deg: boolean,
             kph: boolean,
             changeWindSpeed: () => void,
@@ -44,7 +33,7 @@ function ContentComponent(
                 <div className="flex items-center gap-2">
                     <img src="/icons/wind.svg" alt="humidity-svg" className="h-10" />
                     <div>
-                        <p className="font-semibold">{kph ? data.wind_kph : data.wind_mph}{kph ? ' Km/h' : "Mp/h"} </p>
+                        <p className="font-semibold">{kph ? data.wind_kph : data.wind_mph}{kph ? ' Km/h' : " Mp/h"} </p>
                         <p className="text-sm">Wind Speed</p>
                     </div>
                     <img src="/icons/change.png" alt="refresh-icon" className="h-4 w-4 cursor-pointer" onClick={() => changeWindSpeed()} />

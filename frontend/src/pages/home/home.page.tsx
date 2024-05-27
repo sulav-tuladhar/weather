@@ -3,9 +3,10 @@ import ContentComponent from "../../components/content/content.component"
 import SearchComponent from "../../components/search/search.component"
 import axios from "axios";
 import Loadercomponent from "../../components/common/loader/loader.component";
+import { Weather } from "../../utils/interfaces";
 
 function HomePage() {
-    const [data, setData] = useState(null);
+    const [data, setData] = useState<Weather | null>(null);
     const [isDeg, setIsDeg] = useState(true);
     const [isKph, setIsKph] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
@@ -16,7 +17,7 @@ function HomePage() {
 
     const handleSubmit = async (e: React.SyntheticEvent, cityName: string) => {
         try {
-            if(cityName.length == 0)
+            if (cityName.length == 0)
                 return setError("Please enter a city")
             setError("")
             setCityName(cityName);
@@ -26,11 +27,9 @@ function HomePage() {
             setData(data.data.data);
             setIsLoading(false);
         } catch (err: any) {
-            setIsLoading(false);
-            if(err.response.status == 500)
-                setError("Something went wrong please try again in a few minutes")
             if (err.response.data)
                 setError(err.response.data.message)
+            setIsLoading(false);
         }
     }
 
@@ -47,7 +46,12 @@ function HomePage() {
         <section className="bg-gradient-to-tl from-slate-800 text-white via-violet-500 to-zinc-400 h-[100vh] w-[100%] flex flex-col items-center justify-center gap-4">
             <SearchComponent submit={handleSubmit} />
             {
-                error.length
+                data?.isOldData && (
+                    <p className="text-sm">Outdated weather data detected. Please refresh to see the current weather.</p>
+                )
+            }
+            {
+                error?.length
                     ? <p className="font-semibold text-md text-red-400">{error}</p>
                     : <>{content}</>
             }

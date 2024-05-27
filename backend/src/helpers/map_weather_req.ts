@@ -21,6 +21,8 @@ export default function(newWeather: Weather, weatherData: any){
         newWeather.wind_mph = weatherData.current.wind_mph;
     if(weatherData.current.humidity)
         newWeather.humidity = weatherData.current.humidity;
+    if(weatherData.createdAt)
+        newWeather.createdAt = weatherData.createdAt;
 
     return newWeather;
 }
