@@ -40,7 +40,7 @@ app.use(function(err: any, req: Request, res: Response, next: NextFunction){
     res.status(err.status || err);
     res.json({
         message: err.message || err,
-        status: err.status || 400
+        status: err.status || 500
     })
 })
 

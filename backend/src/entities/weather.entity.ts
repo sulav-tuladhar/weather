@@ -18,7 +18,7 @@ export class Weather {
     temp_f!: number
 
     @Column({ nullable: false })
-    is_day!: boolean
+    is_day!: number
     
     @Column({ nullable: true })
     condition!: string
