@@ -7,6 +7,7 @@ import map_weather_req from "../../helpers/map_weather_req";
 import { repo } from "../../helpers/repo";
 import moment from "moment";
 import { myDataSource } from "../../dataSource";
+import { WeatherData } from "../../helpers/interfaces";
 const dns = require('dns').promises;
 
 const checkInternet = () => {
@@ -30,12 +31,13 @@ export const getWeatherInfo = async (req: Request, res: Response, next: NextFunc
     try {
         const searchParams = req.query.q as string;
         const todayDate = moment().format("YYYY/MM/DD");
-        var data;
+        var data: WeatherData;
 
         // Checking internet connectivity
         const isInternetConnected = await checkInternet();
         if (!isInternetConnected) {
-            data = await fetchDataFromDatabase(todayDate, searchParams)
+            data = await fetchDataFromDatabase(todayDate, searchParams) as any
+            data && (data.isOldData = true)
         } else {
             const resData = await GET(`${process.env.BASE_URL}q=${searchParams}`)
             const weatherInfo = resData.data;
@@ -45,7 +47,7 @@ export const getWeatherInfo = async (req: Request, res: Response, next: NextFunc
             var newWeatherInfo = new Weather();
             weatherInfo.createdAt = todayDate;
             const mapped_data = map_weather_req(newWeatherInfo, weatherInfo);
-            data = await repo.weatherRepo.save(mapped_data);
+            data = await repo.weatherRepo.save(mapped_data) as any;
         }
         if (!data) {
             throw customError("Weather data not found", 404)

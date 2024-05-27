@@ -12,7 +12,8 @@ export interface WeatherData {
     condition_img: string,
     wind_mph: string,
     wind_kph: string,
-    humidity: number
+    humidity: number,
+    isOldData?: boolean
 }
 
 export interface APIERROR {
