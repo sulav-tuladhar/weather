@@ -10,7 +10,8 @@ import { repo } from "../../helpers/repo";
 export const getWeatherInfo = async(req: Request, res: Response, next: NextFunction) => {
     try{
         const searchParams = req.query.q;
-        const data = await axios.get(`${process.env.BASE_URL}q=${searchParams}`)
+        // const data = await axios.get(`${process.env.BASE_URL}q=${searchParams}`)
+        const data = await GET(`${process.env.BASE_URL}q=${searchParams}`)
         const weatherInfo = data.data;      
         if(!weatherInfo){
             throw customError("Weather data not found", 404)
