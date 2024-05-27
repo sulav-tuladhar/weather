@@ -34,5 +34,7 @@ export class Weather {
 
     @Column()
     humidity!: number
-    
+
+    @Column()
+    createdAt!: string;
 }
