@@ -6,6 +6,9 @@ const app = express();
 const PORT = 9191;
 const cors = require('cors');
 const weatherRoute = require('./modules/weather/weather.router');
+// const { specs, swaggerUi } = require('swagger-ui-express');
+import swaggerUi from 'swagger-ui-express'
+import swaggerDocs from '../swagger.json'
 
 require('dotenv').config();
 
@@ -14,7 +17,7 @@ app.use(cors({
     origin: true
 }))
 
-myDataSource    
+myDataSource
     .initialize()
     .then(() => console.log("Database Connected"))
     .catch(err => console.log("Error while connecting to database ", err))
@@ -25,10 +28,11 @@ app.use(express.urlencoded({
 }))
 app.use(express.json())
 
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 app.use('/', weatherRoute);
 
 // 404 error handler
-app.use(function(req: Request, res: Response, next: NextFunction){
+app.use(function (req: Request, res: Response, next: NextFunction) {
     next({
         message: "Page not found",
         status: 404
@@ -36,7 +40,7 @@ app.use(function(req: Request, res: Response, next: NextFunction){
 })
 
 // Error handler middleware
-app.use(function(err: any, req: Request, res: Response, next: NextFunction){
+app.use(function (err: any, req: Request, res: Response, next: NextFunction) {
     res.status(err.status || err);
     res.json({
         message: err.message || err,
@@ -45,3 +49,4 @@ app.use(function(err: any, req: Request, res: Response, next: NextFunction){
 })
 
 app.listen(PORT, () => console.log(`Server is listening at PORT ${PORT}`))
+export default app;

@@ -10,14 +10,14 @@ import { myDataSource } from "../../dataSource";
 import { WeatherData } from "../../helpers/interfaces";
 const dns = require('dns').promises;
 
-const checkInternet = () => {
+export const checkInternet = () => {
     return dns.lookup('google.com')
         .then(() => true)
         .catch(() => false);
 };
 
 // Function to query from the database to get the existing data
-const fetchDataFromDatabase = async (date: string, cityName: string) => {
+export const fetchDataFromDatabase = async (date: string, cityName: string) => {
     const data = await myDataSource
         .getRepository(Weather)
         .createQueryBuilder("weather")
@@ -36,7 +36,8 @@ export const getWeatherInfo = async (req: Request, res: Response, next: NextFunc
         // Checking internet connectivity
         const isInternetConnected = await checkInternet();
         if (!isInternetConnected) {
-            data = await fetchDataFromDatabase(todayDate, searchParams) as any
+            // data = await fetchDataFromDatabase(todayDate, searchParams) as any
+            data = await fetchDataFromDatabase('2020-40-80', 'mymandu') as any
             data && (data.isOldData = true)
         } else {
             const resData = await GET(`${process.env.BASE_URL}q=${searchParams}`)
