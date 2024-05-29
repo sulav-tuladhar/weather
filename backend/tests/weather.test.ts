@@ -55,7 +55,7 @@ describe("Weather API", () => {
 
 
   it("should return 404 for no location found matching parameter", async () => {
-    const response = await request(app).get("/get-weather?q=Londonss");
+    const response = await request(app).get("/get-weather?q=Londonsjs");
     expect(response.status).toBe(404);
     expect(response.body).toEqual({
       message: `No matching location found.`,
@@ -64,7 +64,7 @@ describe("Weather API", () => {
   });
 
   it("Internet connectivity (fails when internet is connected): should return 404 for no location found matching parameter and no internet connectivity", async () => {
-    const response = await request(app).get("/get-weather?q=Londonss");
+    const response = await request(app).get("/get-weather?q=Londonsjs");
     expect(response.status).toBe(404);
     expect(response.body).toEqual({
       message: `Weather data not found`,
