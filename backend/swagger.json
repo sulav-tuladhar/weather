@@ -1,0 +1,95 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Weakly evaluation task of Sulav Tuladhar",
+    "description": "",
+    "version": "1.0"
+  },
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/get-weather": {
+      "get": {
+        "x-swagger-router-controller": "weather",
+        "operationId": "index",
+        "tags": [
+          "Weather"
+        ],
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "The name of the location for which the weather information is provided."
+                },
+                "temp_c": {
+                  "type": "number",
+                  "format": "float",
+                  "description": "The current temperature at the specified location in celsius."
+                },
+                "temp_f": {
+                  "type": "number",
+                  "format": "float",
+                  "description": "The current temperature at the specified location in fahrenheit."
+                },
+                "local_time": {
+                  "type": "string",
+                  "description": "The local time of the specified location"
+                },
+                "is_day": {
+                  "type": "boolean",
+                  "description": "The day or night time of the specified location"
+                },
+                "humidity": {
+                  "type": "number",
+                  "format": "float",
+                  "description": "The current humidity percentage at the specified location."
+                },
+                "condition": {
+                  "type": "string",
+                  "description": "The condition of the weather at the specified location"
+                },
+                "condition_img": {
+                  "type": "string",
+                  "description": "The condition image of the weather at the specified location"
+                },
+                "wind_mph": {
+                  "type": "string",
+                  "description": "The wind speed at the specified location in miles per hour"
+                },
+                "wind_kph": {
+                  "type": "string",
+                  "description": "The wind speed at the specified location in kilometer per hour"
+                },
+                "isOldData": {
+                  "type": "boolean",
+                  "description": "A flag for if the data is freshly called from the api or if it's the old data from the data"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid location query parameter"
+          },
+          "404": {
+            "description": "Weather information not found for the specified location"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    }
+  }
+}

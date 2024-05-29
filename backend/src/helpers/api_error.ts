@@ -5,7 +5,7 @@ export default function (error: APIERROR) {
     var message: string = error.message
     switch (error.code) {
         case 1003:
-            code = 404
+            code = 400
             break;
         case 1005:
             code = 400
