@@ -36,8 +36,7 @@ export const getWeatherInfo = async (req: Request, res: Response, next: NextFunc
         // Checking internet connectivity
         const isInternetConnected = await checkInternet();
         if (!isInternetConnected) {
-            // data = await fetchDataFromDatabase(todayDate, searchParams) as any
-            data = await fetchDataFromDatabase('2020-40-80', 'mymandu') as any
+            data = await fetchDataFromDatabase(todayDate, searchParams) as any
             data && (data.isOldData = true)
         } else {
             const resData = await GET(`${process.env.BASE_URL}q=${searchParams}`)
