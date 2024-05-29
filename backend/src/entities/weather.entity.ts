@@ -11,15 +11,15 @@ export class Weather {
     @Column()
     local_time!: string
 
-    @Column({ nullable: false })
+    @Column('decimal', { precision: 10, scale: 2, nullable: false })
     temp_c!: number
 
-    @Column({ nullable: false })
+    @Column('decimal', { precision: 10, scale: 2, nullable: false })
     temp_f!: number
 
     @Column({ nullable: false })
     is_day!: number
-    
+
     @Column({ nullable: true })
     condition!: string
 
